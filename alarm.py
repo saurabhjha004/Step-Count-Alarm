@@ -8,7 +8,7 @@ from googleapiclient.discovery import build
 import datetime
 import pygame
 
-# Set up Google Fit API credentials
+# Setting up Google Fit API credentials
 SCOPES = ['https://www.googleapis.com/auth/fitness.activity.read', 'offline_access']
 
 def authenticate_with_google():
@@ -23,14 +23,9 @@ def authenticate_with_email():
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        # Here you would authenticate the user with their email and password
-        # For simplicity, let's just print the email and password for now
         st.write(f"Email: {email}")
         st.write(f"Password: {password}")
-        # You would replace the above print statements with your authentication logic
-        # For example, you could check if the email and password match a database record
-        # If authentication is successful, you could proceed with the rest of the app
-        return True  # For demonstration purposes, always return True
+        return True
 
 def fetch_step_count(credentials):
     fit_service = build('fitness', 'v1', credentials=credentials)
@@ -60,7 +55,6 @@ def play_alarm(audio_file):
     pygame.quit()
 
 def turn_off_alarm():
-    # You can add your specific code to turn off the alarm here
     pass
 
 def run_alarm_system(threshold, audio_file, credentials):
@@ -95,7 +89,7 @@ def setup_and_run_alarm(credentials):
     st.sidebar.header("Set Threshold")
     threshold = st.sidebar.number_input("Enter Step Threshold", min_value=1, value=100, step=1)
 
-    audio_file_path = os.path.expanduser("~/Desktop/audio.mp3")  # Adjust the path as per your file location
+    audio_file_path = os.path.expanduser("~/Desktop/audio.mp3")
 
     if st.button("Activate Alarm"):
         run_alarm_system(threshold, audio_file_path, credentials)
